@@ -8,11 +8,13 @@ All my work is presented either in iPython notebooks or Rnotebooks/R markdown fi
 
 * Presentations
 
+  * [Bonferroni Corrections](https://github.com/kdavidr94/analytics_portfolio/blob/master/Presentations/Kevin%20Rodriguez%20Math%20699%20Presentation.pdf): Presented to class when and how to use Bonferroni Correction/Adjustment. The correction is based on the idea if an experimenter is testing n independent or dependent hypotheses, than one way of maintaining or controlling the familywise error rate is to test each individual hypothesis at a statistical significance level of 1/n times.
+
+  * Bootstrapping:
+
 * Projects
 
 * Python 
-
-* [GitHub](http://github.com) (code to insert link)
 
 
 
