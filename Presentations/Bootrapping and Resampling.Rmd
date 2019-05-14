@@ -1,0 +1,187 @@
+---
+title: 'Math 662: Probability Distributions'
+author: "Kevin Rodriguez"
+date:
+output: ioslides_presentation
+---
+
+##Bootstrapping and Resampling
+###What is Bootstrapping?
+###How it works?
+###Advantages of Bootstrapping
+###Application of Bootstrapping
+###Bootstrap Distribution
+###Boot Library in R
+
+##Goal
+
+- Our goal is to find a confidence interval for $\mu$
+- But our sample size is less than 30 and there is no assumption of Normality
+
+###Two Solutions:
+
+- One solution is to find or identify a distribution that is suitable for the population
+- Do not assume any Distribution for the population
+
+####Two Versions of Bootstrapping:
+
+- Parametric Bootstrapping: Simulating multiple samples from the assumed distribution
+- Non-parametric Bootstrapping: Simulating multiple samples directly from the data
+
+
+##What is Bootstrapping?
+
+Bootstrapping is a statistical technique that falls under resampling.
+Just like standard ways to find confidence intervals, we can use Bootstrapping to estimate a population parameter.
+
+- Bootstrapping is relatively new
+- The method was first used in a 1979 paper by Bradely Efron
+- The name "Bootstrapping" comes from the phrase "To lift himself up by his bootstraps."
+- It is a metaphor for accomplishing an "impossible" task without any help
+
+##How it works?
+
+- Bootstrapping is just sampling with replacement
+- Suppose we take a random sample of 10
+- Then we consider our random sample as our "population"
+- From this we take B samples of 10 from the random sample with replacement
+- We generally want B to be between 10,000 and 100,000
+
+##In General
+
+- We are interested in estimating a population parameter say, $\theta$
+- Let $X = (X_1,X_2,...,X_n)$ be a random sample from an unknown distribution
+- Let $\hat\theta$ be the estimate for $\theta$
+- We then take random sample with replacement of lenght n
+- We call these samples, Bootstrap samples = $(X_1^{*}, X_2^{*},...,X_B^{*})$
+- From the Bootstrap Samples when can calculate estimates for each
+- Let $\hat{\theta_1^{*}}, \hat{\theta_2^{*}},...,\hat{\theta_B^{*}}$ denote the estimates for
+  each Bootstrap samples. 
+  
+##Advantages
+
+- Very quick to perform
+- No assumptions about Distribution
+- Samples need not be large
+- Typically only done when samples are small
+- Can be used to estimate any population parameter
+  
+##Application
+```{r, comment = ""}
+library(ggplot2)
+x <- c(3,13,7,5,6,0,2,4,1,22,9)
+mean(x)
+```
+```{r,comment = "", echo = FALSE, fig.width=6,fig.height=3.5}
+ggplot()+
+  geom_histogram(aes(x= x), fill = "red", col = "black", bins = 6)
+```
+
+##Bootstrapping
+```{r, comment = ""}
+
+B <- 100000
+
+B_samples <- replicate(B ,sample(x, replace = TRUE))
+dim(B_samples)
+B_means <- apply(B_samples,2,mean)
+
+B_means <- sort(B_means)
+q<- quantile(B_means, c(.025,.975))
+q
+
+
+```
+
+
+##Bootstrap Distribution
+```{r, echo = FALSE}
+library(ggplot2)
+
+ggplot()+
+geom_histogram(aes(x= B_means),fill = "blue", col = "black", bins = 40)
+mean(B_means)
+
+
+
+```
+
+##Theorem 4.2.1 (Central Limit Theorem):
+
+Let $X_1,X_2,...,X_n$ denote the observation of a random sample from a distribution that has a mean $\mu$ and finite variance $\sigma^2$. Then the distribution function of the random variable $W_n = (\bar{X}-\mu)/(\sigma/\sqrt{n})$ converges to $\Phi$, the distribution of the $N(0,1)$ distribution as $n\to\infty$.
+
+##Why is the Central Limit Theorm Important?:
+
+- Since we are taking repeated samples of our "population" then our Bootstrap Distribution will be approximately normal
+- The mean of the Bootstrap Distirbution will approximate  the mean of the sampling distribution
+- The standard deviation of the Bootstrap Distribtuion will be an estimate for the standard error 
+
+##Comparison of Bootstrap Distributions
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(gridExtra)
+
+k<- c(10,100,1000,10000)
+my_Bootstraps <- list()
+my_means.2 <- list()
+
+for (i in 1:4)
+  {
+my_Bootstraps[[i]] <- replicate(k[i] ,sample(x,replace = TRUE))
+my_means.2[[i]] <- apply(my_Bootstraps[[i]],2,mean)
+
+}
+
+a <- ggplot()+
+  geom_histogram(aes(x= my_means.2[[1]]), fill = "blue", col = "black", bins = 30)+
+  ggtitle("Bootstrap Samples of 10")
+
+b <- ggplot()+
+  geom_histogram(aes(x= my_means.2[[2]]), fill = "blue", col = "black", bins = 30)+
+  ggtitle("Bootstrap Samples of 100")
+
+c <- ggplot()+
+  geom_histogram(aes(x= my_means.2[[3]]), fill = "blue", col = "black", bins = 30)+
+  ggtitle("Bootstrap Samples of 1000")
+
+d <- ggplot()+
+  geom_histogram(aes(x= my_means.2[[4]]), fill = "blue", col = "black", bins = 30)+
+  ggtitle("Bootstrap Samples of 10000")
+
+grid.arrange(a,b,c,d, ncol = 2,nrow = 2)
+
+```
+
+
+##Boot Function
+```{r, echo = FALSE, comment = ""}
+library(boot)
+
+f1 <- function(x, id) {mean(x[id])}
+
+boot.out <- boot(x, f1, B)
+boot.out
+
+```
+
+##boot.ci Function
+
+```{r, comment = "", echo = FALSE}
+
+boot.ci(boot.out, conf = .95, type = c("perc", "bca"))
+
+
+```
+
+##References:
+
+- Efron, B. Bootstrap Methods: Another Look at the Jackknife. Ann. Statist. 7 (1979), no. 1, 1--26. doi:10.1214/aos/1176344552. https://projecteuclid.org/euclid.aos/1176344552
+
+- Haukoos, Jason S., and Roger J. Lewis. “Advanced Statistics: Bootstrapping Confidence Intervals for Statistics with ‘Difficult’ Distributions.” Academic Emergency Medicine, Blackwell Publishing Ltd, 28 June 2008, onlinelibrary.wiley.com/resolve/openurl?genre=article&sid=nlm%3Apubmed&issn=1069-6563&date=2005&volume=12&issue=4&spage=360.
+
+- Hogg, Robert V., et al. “Chapter 4: Some Elementary Statistics, Section 2: Confidence Interval.” Introduction to Mathematical Statistics, 7th ed., Pearson, 2013.
+
+- Singh, Kesar, and Minge Xie. “Bootstrap: A Statistical Method.” www.stat.rutgers.edu/home/mxie/stat586/handout/Bootstrap1.pdf.
+
+
