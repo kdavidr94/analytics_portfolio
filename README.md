@@ -23,7 +23,7 @@ variables. We used machine learning algorithms such as, logistic regression, dec
 
 	* [Euler's Method](https://github.com/kdavidr94/analytics_portfolio/blob/master/Python%20Scripts/Euler's%20Method.ipynb): Euler's method is a numerical method to solve first order differential equation with a given initial value. Used packages such as **numpy**,**sympy**, and **matplotlib** for visualizations.
 	
-	* [RK4](https://github.com/kdavidr94/analytics_portfolio/blob/master/Python%20Scripts/RK4.ipynb): Just like Euler's Method, the fourth-order Runge-Kutta,RK4 is a method is approximate a first order differential equation. The fourth-order Runge-Kutta method requires four evaluations of the righthand side per step h. 
+	* [RK4](https://github.com/kdavidr94/analytics_portfolio/blob/master/Python%20Scripts/RK4.ipynb): Just like Euler's Method, the fourth-order Runge-Kutta,RK4 is a method to approximate a first order differential equation. The fourth-order Runge-Kutta method requires four evaluations of the righthand side per step h. 
 	
 	* [Taylor Series/Expansion](https://github.com/kdavidr94/analytics_portfolio/blob/master/Python%20Scripts/taylor.ipynb): A Taylor series is a representation of a function as an infinite sum of terms that are calculated from the values of the function's derivatives at a single point.
 	
