@@ -15,7 +15,7 @@ All my work is presented either in iPython notebooks or Rnotebooks/R markdown fi
 * Projects
 
 	* [Determining Income](https://github.com/kdavidr94/analytics_portfolio/blob/master/Projects/Determining%20Income.pdf): Our goal was to determine whether a person is able to make $50,000 or more based on 14
-variables. We used machine learning algorithms such as, logistic regression, decision trees, random forest method, and stepwise selection to compare the variables, as well as doing an exploratory analysis of the data.
+variables. We used **machine learning algorithms** such as, **logistic regression**, **decision trees**, **random forest method**, and stepwise selection to compare the variables, as well as doing an exploratory analysis of the data.
 	
 	* [Acey Duecy](https://github.com/kdavidr94/analytics_portfolio/blob/master/Projects/Acey_Duecy.ipynb): Acey Duecy is a game that I created for a project. I used classes to create the cards and deck The instructions for game found in jupyter notebook. **(You can copy/paste the code in python file to run game)**
 
