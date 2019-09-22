@@ -14,7 +14,7 @@ All my work is presented either in iPython notebooks or Rnotebooks/R markdown fi
 
 * Projects
 
-	* [Naive Bayes Classifier (Graduate Admissions)](https://github.com/kdavidr94/analytics_portfolio/blob/master/Projects/Naive%20Bayes_Graduate%20Admissions.ipynb): The dataset contains several parameters which are considered important during the application for a Masters Program. The purpose of this analysis is to perform Exploratory Analysis to the dataset,see if there is any correlation between any variables
+	* [Naive Bayes Classifier (Graduate Admissions)](https://github.com/kdavidr94/analytics_portfolio/blob/master/Projects/Naive%20Bayes_Graduate%20Admissions.ipynb): The dataset contains several parameters which are considered important during the application for a Masters Program. The purpose of this analysis is to perform Exploratory Analysis to the dataset, see if there is any correlation between any variables
 and predict output that gives them a fair idea about their chances for a particular university using **machine learning algorithms**.
 
 	* [Determining Income](https://github.com/kdavidr94/analytics_portfolio/blob/master/Projects/Determining%20Income.pdf): Our goal was to determine whether a person is able to make $50,000 or more based on 14
